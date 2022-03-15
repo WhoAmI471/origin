@@ -1,4 +1,3 @@
-from base64 import encode
 import json
 
 def load_candidates():

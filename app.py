@@ -10,7 +10,7 @@ def home():
     str = '<pre>'
 
     for candidate in candidates.values():
-        str += f'Имя кандидата - {candidate["name"]} <br>Позиция кандидата {candidate["id"]} <br>Навыки через запятую {candidate["skills"]} <br><br>'
+        str += f'Имя кандидата - {candidate["name"]} <br>Позиция кандидата {candidate["position"]} <br>Навыки через запятую {candidate["skills"]} <br><br>'
 
     str += '</pre>'
     return str
@@ -20,7 +20,7 @@ def home():
 def profile(id):
     candidate = candidates[id]
 
-    str = f'<img src={candidate["picture"]}></img> <br><br>Имя кандидата - {candidate["name"]} <br>Позиция кандидата {candidate["id"]} <br>Навыки через запятую {candidate["skills"]} <br><br>'
+    str = f'<img src={candidate["picture"]}></img> <br><br>Имя кандидата - {candidate["name"]} <br>Позиция кандидата {candidate["position"]} <br>Навыки через запятую {candidate["skills"]} <br><br>'
 
     return str
 
@@ -28,13 +28,16 @@ def profile(id):
 @app.route('/skill/<skill>')
 def search_skill(skill):
 
+    str_skill = ''
+
     for candidate in candidates.values():
         skills = candidate['skills'].split(', ')
         skills = [x.lower() for x in skills]
         if skill.lower() in skills:
-            str = f'Имя кандидата - {candidate["name"]} <br>Позиция кандидата {candidate["id"]} <br>Навыки через запятую {candidate["skills"]} <br><br>'
+            str_skill += f'Имя кандидата - {candidate["name"]} <br>Позиция кандидата {candidate["position"]} <br>Навыки через запятую {candidate["skills"]} <br><br>'
+    str_skill += ''
 
-    return str
+    return str_skill
 
     
-app.run()
+app.run(debug=True)
